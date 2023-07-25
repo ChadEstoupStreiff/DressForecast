@@ -32,10 +32,33 @@ class DB:
                 exit(1)
         return DB.__instance
 
-    def get_cursor(self):
+    def _get_cursor(self):
         return self.conn.cursor(prepared=True)
 
-    def commit(self, cursor):
-        if cursor is not None:
-            cursor.close()
-        self.conn.commit()
+    def commit(self, query: str, values: list = None):
+        try:
+            if values is None:
+                values = ()
+            cursor = self._get_cursor()
+            cursor.execute(query, values)
+
+            if cursor is not None:
+                cursor.close()
+            self.conn.commit()
+        except:
+            return False
+        return True
+
+    def execute(self, query: str, values: list = None):
+        try:
+            if values is None:
+                values = ()
+            cursor = self._get_cursor()
+            cursor.execute(query, values)
+
+            data = [[val for val in values] for values in cursor]
+            if cursor is not None:
+                cursor.close()
+            return data
+        except:
+            return None

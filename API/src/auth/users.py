@@ -12,8 +12,10 @@ def register_user(user_mail: str, user_password: str, user_name: str, user_sex: 
     return None
 
 
-def check_user(email: str, password: str):
-    for user in get_users():
-        if user.email == email and user.password == password:
-            return True
-        return False
+def check_user(user_mail: str, user_password: str):
+    users = get_users()
+    if users is not None:
+        for user in users:
+            if user[0] == user_mail and user[1] == user_password:
+                return True
+    return False

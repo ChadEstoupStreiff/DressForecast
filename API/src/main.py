@@ -4,11 +4,13 @@ from fastapi.security import OAuth2PasswordBearer
 
 from fastapi import FastAPI, Body
 
-from auth.users import UserSchema, UserLoginSchema, register_user, check_user, get_token
+from auth.users import register_user, check_user, get_token
 
 from fastapi import FastAPI, Body, Depends
 from auth.auth_bearer import JWTBearer
-from auth.auth_handler import signJWT
+from db.drivers import DB
+
+DB()
 
 app = FastAPI()
 
@@ -25,14 +27,15 @@ app.add_middleware(
 
 
 @app.post("/user/signup", tags=["user"])
-async def create_user(user: UserSchema = Body(...)):
-    return register_user(user)
+async def create_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
+                      user_city: str):
+    return register_user(user_mail, user_password, user_name, user_sex, user_country, user_city)
 
 
 @app.post("/user/login", tags=["user"])
-async def user_login(user: UserLoginSchema = Body(...)):
-    if check_user(user):
-        return get_token(user.email)
+async def user_login(user_mail: str, user_password: str):
+    if check_user(user_mail, user_password):
+        return get_token(user_mail)
     return {
         "error": "Wrong login details!"
     }
@@ -41,7 +44,7 @@ async def user_login(user: UserLoginSchema = Body(...)):
 # Clothes
 
 
-@app.post("/clothes", dependencies=[Depends(JWTBearer())], tags=["clothes"])
+@app.get("/clothes", dependencies=[Depends(JWTBearer())], tags=["clothes"])
 async def list_clothes() -> dict:
     return {
         "data": "in dev"

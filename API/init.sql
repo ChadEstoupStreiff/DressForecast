@@ -1,6 +1,6 @@
 CREATE TABLE `Users` (
   `user_mail` varchar(128) NOT NULL,
-  `user_password` varchar(256),
+  `user_password` BLOB(512),
   `user_name` varchar(256),
   `user_sex` varchar(6),
   `user_country` varchar(256),

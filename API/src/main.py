@@ -1,16 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordBearer
 
-from fastapi import FastAPI, Body
-
-from auth.users import register_user, check_user, get_token
-
-from fastapi import FastAPI, Body, Depends
 from auth.auth_bearer import JWTBearer
-from db.drivers import DB
-
-DB()
+from auth.users import register_user, check_user, get_token
 
 app = FastAPI()
 

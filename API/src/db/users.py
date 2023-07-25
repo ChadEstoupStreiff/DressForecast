@@ -2,6 +2,7 @@ from db.drivers import DB
 from typing import List
 
 
+
 def create_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
                 user_city: str) -> bool:
 

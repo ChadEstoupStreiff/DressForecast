@@ -15,7 +15,7 @@ services:
         networks:
             - dressforecast-network
         volumes:
-            - .env:/app/.env
+            - .env:/.env
     dressforecast_database:
         env_file:
             - .env

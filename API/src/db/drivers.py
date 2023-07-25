@@ -4,6 +4,7 @@ import time
 import mysql.connector
 from dotenv import dotenv_values
 
+from typing import List, Any
 
 class DB:
     __instance = None
@@ -15,7 +16,7 @@ class DB:
                 cls, *args, **kwargs
             )
 
-            config = dotenv_values("/app/.env")
+            config = dotenv_values("/.env")
             DB.__instance.conn = None
             for _ in range(10):
                 try:
@@ -35,7 +36,7 @@ class DB:
     def _get_cursor(self):
         return self.conn.cursor(prepared=True)
 
-    def commit(self, query: str, values: list = None):
+    def commit(self, query: str, values: tuple = None) -> bool:
         try:
             if values is None:
                 values = ()
@@ -49,16 +50,19 @@ class DB:
             return False
         return True
 
-    def execute(self, query: str, values: list = None):
-        try:
-            if values is None:
-                values = ()
-            cursor = self._get_cursor()
-            cursor.execute(query, values)
+    def execute(self, query: str, values: tuple = None) -> List[List[Any]]:
+        if values is None:
+            values = ()
+        cursor = self._get_cursor()
+        cursor.execute(query, values)
 
-            data = [[val for val in values] for values in cursor]
-            if cursor is not None:
-                cursor.close()
-            return data
-        except:
-            return None
+        data = [[val for val in values] for values in cursor]
+        if cursor is not None:
+            cursor.close()
+        return data
+
+    def execute_single(self, query: str, values: tuple = None) -> List[Any]:
+        data = self.execute(query, values)
+        if len(data) > 0:
+            return data[0]
+        return None

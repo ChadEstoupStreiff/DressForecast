@@ -1,7 +1,7 @@
 from fastapi import Request, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 
-from .auth_handler import decodeJWT
+from auth.auth_handler import decode_jwt
 
 
 class JWTBearer(HTTPBearer):
@@ -21,13 +21,13 @@ class JWTBearer(HTTPBearer):
 
     @staticmethod
     def verify_jwt(jwtoken: str) -> bool:
-        isTokenValid: bool = False
+        is_token_valid: bool = False
 
         try:
-            payload = decodeJWT(jwtoken)
+            payload = decode_jwt(jwtoken)
         except:
             payload = None
 
         if payload:
-            isTokenValid = True
-        return isTokenValid
+            is_token_valid = True
+        return is_token_valid

@@ -82,5 +82,5 @@ async def clothes_for_week(token: str = Depends(JWTBearer())):
 # Weather
 
 @app.get("/weather/week", tags=["weather"])
-async def get_week_weather():
-    return get_weather_week()
+async def get_week_weather(token: str = Depends(JWTBearer())):
+    return get_weather_week(get_user_id(token))

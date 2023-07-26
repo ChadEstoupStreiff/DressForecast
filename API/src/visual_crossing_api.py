@@ -2,12 +2,14 @@ import urllib.request
 import sys
 import json
 from db.clothes import get_clothes
+from db.users import get_user_info
 
 
-def get_weather_week():
+def get_weather_week(user: str):
     try:
+        user_info = get_user_info(user)
         result_bytes = urllib.request.urlopen(
-            "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/paris?unitGroup=metric&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json")
+            f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{user_info['city']} {user_info['country']}?unitGroup=metric&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json")
 
         # Parse the results as JSON
         json_data = json.load(result_bytes)
@@ -37,9 +39,9 @@ def get_weather_week():
         return "Error occured"
 
 
-def get_clothes_for_week(mail):
-    clothes = get_clothes(mail)
-    week = get_weather_week()
+def get_clothes_for_week(user):
+    clothes = get_clothes(user)
+    week = get_weather_week(user)
 
     return {
         "clothes": clothes,

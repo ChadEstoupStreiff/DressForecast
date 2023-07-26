@@ -26,7 +26,9 @@ app.add_middleware(
 @app.post("/user/signup", tags=["user"])
 async def create_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
                       user_city: str):
-    return register_user(user_mail, user_password, user_name, user_sex, user_country, user_city)
+    if get_weather_week(user_mail) is not None:
+        return register_user(user_mail, user_password, user_name, user_sex, user_country, user_city)
+    return None
 
 
 @app.post("/user/login", tags=["user"])

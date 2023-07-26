@@ -1,7 +1,7 @@
 import urllib.request
 import sys
 import json
-from bd.clothes import get_clothes
+from db.clothes import get_clothes
 
 def get_weather_week():
     try: 

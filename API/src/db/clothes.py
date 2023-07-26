@@ -13,11 +13,18 @@ class Clothe:
     c_rain: str
 
 
+__TYPES = ["HAT", "TSHIRT", "PULL", "JACKET", "PANTS", "SHORT", "SKIRT", "SOCKS", "SHOES"]
+__HEAT = ["COLD", "MEDIUM", "HOT"]
+__RAIN = ["NORAIN", "SMALLRAIN", "BIGRAIN"]
+
+
 def register_clothes(user: str, clothe: Clothe) -> bool:
-    return DB().commit("""INSERT INTO Clothes
-(user_mail, name, color, type, heat, rain)
-VALUES (%s,%s,%s,%s,%s,%s)""",
-                       (user, clothe.name, clothe.color, clothe.c_type, clothe.c_heat, clothe.c_rain))
+    if clothe.c_type in __TYPES and clothe.c_heat in __HEAT and clothe.c_rain in __RAIN:
+        return DB().commit("""INSERT INTO Clothes
+                            (user_mail, name, color, type, heat, rain)
+                            VALUES (%s,%s,%s,%s,%s,%s)""",
+                           (user, clothe.name, clothe.color, clothe.c_type, clothe.c_heat, clothe.c_rain))
+    return False
 
 
 def get_clothes(user: str) -> List[Clothe]:

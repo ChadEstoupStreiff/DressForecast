@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict, Any
 
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -54,7 +54,7 @@ async def user_login_info(token: str = Depends(JWTBearer())):
 
 
 @app.get("/clothes", tags=["clothes"])
-async def list_clothes(token: str = Depends(JWTBearer())) -> List:
+async def list_clothes(token: str = Depends(JWTBearer())) -> List[Dict[str, Any]]:
     return get_clothes(get_user_id(token))
 
 

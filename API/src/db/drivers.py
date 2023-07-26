@@ -1,10 +1,10 @@
 import logging
 import time
+from typing import Union, List, Any, Tuple
 
 import mysql.connector
 from dotenv import dotenv_values
 
-from typing import List, Any
 
 class DB:
     __instance = None
@@ -36,7 +36,7 @@ class DB:
     def _get_cursor(self):
         return self.conn.cursor(prepared=True)
 
-    def commit(self, query: str, values: tuple = None) -> bool:
+    def commit(self, query: str, values: Tuple = None) -> bool:
         try:
             if values is None:
                 values = ()
@@ -50,19 +50,27 @@ class DB:
             return False
         return True
 
-    def execute(self, query: str, values: tuple = None) -> List[List[Any]]:
+    def execute(self, query: str, values: Tuple = None, keys: Tuple = None) -> List[List[Any]]:
         if values is None:
             values = ()
         cursor = self._get_cursor()
         cursor.execute(query, values)
 
         data = [[val for val in values] for values in cursor]
+        if keys is not None and len(data) > 0:
+            data_dict = []
+            for data_row in data:
+                data_dict_row = {}
+                for i, key in enumerate(keys):
+                    data_dict_row[key] = data_row[i]
+                data_dict.append(data_dict_row)
+            data = data_dict
         if cursor is not None:
             cursor.close()
         return data
 
-    def execute_single(self, query: str, values: tuple = None) -> List[Any]:
-        data = self.execute(query, values)
+    def execute_single(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[Any], None]:
+        data = self.execute(query, values, keys)
         if len(data) > 0:
             return data[0]
         return None

@@ -1,14 +1,18 @@
+from typing import Union, Dict
+
 import bcrypt
-from auth.auth_handler import sign_jwt
-from db.users import get_user_password, create_user
 from dotenv import dotenv_values
 
+from auth.auth_handler import decode_jwt
+from auth.auth_handler import sign_jwt
+from db.users import get_user_password, create_user
 
-def get_token(mail: str):
+
+def get_token(mail: str) -> str:
     return sign_jwt(mail)
 
 
-def is_mail(mail: str):
+def is_mail(mail: str) -> bool:
     splitted = mail.split('@')
     if len(splitted) == 2 and len(splitted[0]) > 0 and len(splitted[1]) > 2:
         splitted_domain = splitted[1].split('.')
@@ -16,7 +20,8 @@ def is_mail(mail: str):
     return False
 
 
-def register_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str, user_city: str):
+def register_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
+                  user_city: str) -> Union[str, None]:
     if is_mail(user_mail):
         config = dotenv_values("/.env")
         user_password = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt(rounds=int(config["SALT_LENGTH"])))
@@ -25,7 +30,15 @@ def register_user(user_mail: str, user_password: str, user_name: str, user_sex: 
     return None
 
 
-def check_user(user_mail: str, user_password: str):
+def check_user(user_mail: str, user_password: str) -> bool:
     user_encrypted_password = get_user_password(user_mail)
     return user_encrypted_password is not None and bcrypt.checkpw(user_password.encode(),
                                                                   bytes(user_encrypted_password))
+
+
+def get_user_login_info(token: str) -> Dict[str, str]:
+    return decode_jwt(token)
+
+
+def get_user_id(token: str) -> str:
+    return get_user_login_info(token)["user_id"]

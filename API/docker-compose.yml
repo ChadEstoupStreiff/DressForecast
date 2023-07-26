@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+    dressforecast_api:
+        build:
+            context: .
+        container_name: dressforecast_api
+        depends_on:
+            - dressforecast_database
+        links:
+            - dressforecast_database
+        restart: always
+        ports:
+            - ${API_PORT}:80
+        networks:
+            - dressforecast-network
+        volumes:
+            - .env:/.env
+    dressforecast_database:
+        env_file:
+            - .env
+        image: 'mariadb:latest'
+        container_name: dressforecast_database
+        restart: always
+        environment:
+            - MYSQL_DATABASE=${SQL_DATABASE}
+            - MYSQL_ROOT_PASSWORD=${SQL_ROOTPASSWORD}
+        volumes:
+            - ${SQL_DATA_PATH}:/var/lib/mysql/
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+            - dressforecast-network
+        hostname: dressforecast_database
+        
+    dressforecast_phpmyadmin:
+       env_file:
+         - .env
+       image: phpmyadmin/phpmyadmin
+       container_name: dressforecast_phpmyadmin
+       restart: always
+       depends_on:
+         - dressforecast_database
+       links:
+         - dressforecast_database
+       environment:
+         PMA_HOST: dressforecast_database
+         PMA_USER: root
+         PMA_PASSWORD: ${SQL_ROOTPASSWORD}
+         PMA_PORT: 3306
+         PMA_ARBITRARY: 1
+       networks:
+         - dressforecast-network
+       ports:
+         - ${PMA_PORT}:80
+
+networks:
+    dressforecast-network:
+        name: dressforecast-network
+        driver: bridge

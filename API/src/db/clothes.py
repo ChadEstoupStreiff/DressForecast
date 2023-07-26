@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from enum import Enum, auto
-from typing import List
+from typing import List, Dict, Any
+
+from db.drivers import DB
 
 
 class ClothesTypes(Enum):
@@ -32,8 +34,12 @@ class Clothe:
 
 
 def register_clothes(user: str, clothe: Clothe) -> bool:
-    return False
+    return DB().commit("""INSERT INTO Clothes
+(user_mail, name, color, type, heat, rain)
+VALUES (%s,%s,%s,%s,%s,%s)""",
+                       (user, clothe.name, clothe.color, clothe.c_type, clothe.c_heat, clothe.c_rain))
 
 
-def get_clothes(user: str) -> List[Clothe]:
-    return []
+def get_clothes(user: str) -> List[Dict[str, Any]]:
+    return DB().execute("""SELECT name, color, type, heat, rain FROM Clothes WHERE user_mail=%s""", (user,),
+                        ("name", "color", "type", "heat", "rain"))

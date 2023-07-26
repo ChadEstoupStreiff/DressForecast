@@ -19,19 +19,12 @@ def get_user_password(email: str) -> Union[bytes, None]:
 
 
 def get_users() -> List:
-    return DB().execute("""SELECT user_mail, user_name, user_sex, user_country, user_city FROM Users""")
+    return DB().execute("""SELECT user_mail, user_name, user_sex, user_country, user_city FROM Users""",
+                        keys=("mail", "name", "sex", "country", "city"))
 
 
 def get_user_info(user_mail: str) -> Dict[str, str]:
     data = DB().execute_single(
         """SELECT user_mail, user_name, user_sex, user_country, user_city FROM Users WHERE user_mail=%s""",
-        (user_mail,))
-    if data is not None:
-        return {
-            "mail": data[0],
-            "name": data[1],
-            "sex": data[2],
-            "country": data[3],
-            "city": data[4],
-        }
-    return {}
+        (user_mail,), ("mail", "name", "sex", "country", "city"))
+    return data

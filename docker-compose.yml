@@ -10,7 +10,7 @@ services:
         networks:
             - dressforecast-network
         volumes:
-            - ./WEB/src:/usr/local/apache2/htdocs
+            - ./WEB:/usr/local/apache2/htdocs
     dressforecast_api:
         build:
             context: ./API

@@ -9,7 +9,7 @@ def get_weather_week(user: str):
     try:
         user_info = get_user_info(user)
         result_bytes = urllib.request.urlopen(
-            f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{user_info['city']} {user_info['country']}?unitGroup=metric&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json")
+            f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{user_info['city']}%20{user_info['country']}?unitGroup=metric&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json")
 
         # Parse the results as JSON
         json_data = json.load(result_bytes)

@@ -1,11 +1,11 @@
-from typing import List, Dict, Any
+from typing import List
 
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 
 from auth.auth_bearer import JWTBearer
 from auth.users import register_user, check_user, get_token, get_user_id, get_user_login_info
-from db.clothes import register_clothes, get_clothes, Clothe, ClothesTypes, ClothesHeat, ClothesRain
+from db.clothes import register_clothes, get_clothes, Clothe
 from db.users import get_user_info
 from visual_crossing_api import get_weather_week, get_clothes_for_week
 
@@ -54,7 +54,7 @@ async def user_login_info(token: str = Depends(JWTBearer())):
 
 
 @app.get("/clothes", tags=["clothes"])
-async def list_clothes(token: str = Depends(JWTBearer())) -> List[Dict[str, Any]]:
+async def list_clothes(token: str = Depends(JWTBearer())) -> List[Clothe]:
     return get_clothes(get_user_id(token))
 
 
@@ -65,13 +65,18 @@ async def add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: st
         clothe = Clothe(
             name,
             color,
-            ClothesTypes[c_type],
-            ClothesHeat[c_heat],
-            ClothesRain[c_rain],
+            c_type,
+            c_heat,
+            c_rain,
         )
         return register_clothes(get_user_id(token), clothe)
     except:
         return False
+
+
+@app.get("/clothes/week", tags=["weather", "clothes"])
+async def clothes_for_week(token: str = Depends(JWTBearer())):
+    return get_clothes_for_week(get_user_id(token))
 
 
 # Weather
@@ -79,8 +84,3 @@ async def add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: st
 @app.get("/weather/week", tags=["weather"])
 async def get_week_weather():
     return get_weather_week()
-
-
-@app.get("/clothes/week", tags=["weather","clothes"])
-async def get_clothes_for_week(token: str = Depends(JWTBearer())):
-    return get_clothes_for_week(get_user_id(token))

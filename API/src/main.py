@@ -7,6 +7,7 @@ from auth.auth_bearer import JWTBearer
 from auth.users import register_user, check_user, get_token, get_user_id, get_user_login_info
 from db.clothes import register_clothes, get_clothes, Clothe, ClothesTypes, ClothesHeat, ClothesRain
 from db.users import get_user_info
+from visual_crossing_api import get_weather_week
 
 app = FastAPI()
 
@@ -71,3 +72,10 @@ async def add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: st
         return register_clothes(get_user_id(token), clothe)
     except:
         return False
+
+
+# Weather
+
+@app.get("/weather/week", tags=["weather"])
+async def get_week_weather() -> List:
+    return get_weather_week()

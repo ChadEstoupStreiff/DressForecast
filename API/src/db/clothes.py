@@ -32,8 +32,8 @@ class Clothe:
 
 
 def register_clothes(user: str, clothe: Clothe) -> bool:
-    pass
+    return False
 
 
 def get_clothes(user: str) -> List[Clothe]:
-    pass
+    return []

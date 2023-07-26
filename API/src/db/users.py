@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Union
 
 from db.drivers import DB
 
@@ -11,8 +11,11 @@ VALUES (%s,%s,%s,%s,%s,%s)""",
                        (user_mail, user_password, user_name, user_sex, user_country, user_city))
 
 
-def get_user_password(email: str) -> bytes:
-    return DB().execute_single("""SELECT user_password FROM Users WHERE user_mail=%s""", (email,))[0]
+def get_user_password(email: str) -> Union[bytes, None]:
+    data = DB().execute_single("""SELECT user_password FROM Users WHERE user_mail=%s""", (email,))
+    if data is not None:
+        return data[0]
+    return None
 
 
 def get_users() -> List:

@@ -17,8 +17,6 @@ services:
         volumes:
             - .env:/.env
     dressforecast_database:
-        env_file:
-            - .env
         image: 'mariadb:latest'
         container_name: dressforecast_database
         restart: always
@@ -31,27 +29,36 @@ services:
         networks:
             - dressforecast-network
         hostname: dressforecast_database
-        
-    dressforecast_phpmyadmin:
-       env_file:
-         - .env
-       image: phpmyadmin/phpmyadmin
-       container_name: dressforecast_phpmyadmin
-       restart: always
-       depends_on:
-         - dressforecast_database
-       links:
-         - dressforecast_database
-       environment:
-         PMA_HOST: dressforecast_database
-         PMA_USER: root
-         PMA_PASSWORD: ${SQL_ROOTPASSWORD}
-         PMA_PORT: 3306
-         PMA_ARBITRARY: 1
-       networks:
-         - dressforecast-network
-       ports:
-         - ${PMA_PORT}:80
+    adminer:
+        image: adminer
+        container_name: dressforecast_adminer
+        restart: always
+        depends_on:
+            - dressforecast_database
+        links:
+            - dressforecast_database
+        ports:
+            - ${PMA_PORT}:8080
+        networks:
+            - dressforecast-network
+#    dressforecast_phpmyadmin:
+#       image: phpmyadmin/phpmyadmin
+#       container_name: dressforecast_phpmyadmin
+#       restart: always
+#       depends_on:
+#         - dressforecast_database
+#       links:
+#         - dressforecast_database
+#       environment:
+#         PMA_HOST: dressforecast_database
+#         PMA_USER: root
+#         PMA_PASSWORD: ${SQL_ROOTPASSWORD}
+#         PMA_PORT: 3306
+#         PMA_ARBITRARY: 1
+#       networks:
+#         - dressforecast-network
+#       ports:
+#         - ${PMA_PORT}:80
 
 networks:
     dressforecast-network:

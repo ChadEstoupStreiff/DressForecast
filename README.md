@@ -2,4 +2,4 @@
 
 
 ## Structure diagram
-![structure diagram](dressforecast_diagram.png)
+![structure diagram](resources/dressforecast_diagram.png)

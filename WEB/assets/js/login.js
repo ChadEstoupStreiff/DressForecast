@@ -12,10 +12,12 @@ loginForm.addEventListener('submit', function (event) {
     // Call the loginUser function from auth.js
     loginUser(userData)
         .then(responseData => {
-            const token = responseData;
-            localStorage.setItem('token', token);
-            // Redirect to the main page after successful logging in
-            window.location.href = 'index.html'; // Replace 'index.html' with the actual login page URL
+            if (responseData != null) {
+                const token = responseData;
+                localStorage.setItem('token', token);
+                // Redirect to the main page after successful logging in
+                window.location.href = 'index.html'; // Replace 'index.html' with the actual login page URL
+            }
         })
         .catch(error => {
             // Handle any errors that occurred during logging in

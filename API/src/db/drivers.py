@@ -67,12 +67,10 @@ class DB:
             data = data_dict
         if cursor is not None:
             cursor.close()
-        if len(data) > 0:
-            return data
-        return None
+        return data
 
     def execute_single(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[Any], None]:
         data = self.execute(query, values, keys)
-        if data is not None:
+        if len(data) > 0:
             return data[0]
         return None

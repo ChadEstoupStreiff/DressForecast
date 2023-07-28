@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import List
 
+from fastapi import HTTPException
+
 from db.drivers import DB
 
 
@@ -20,11 +22,14 @@ __RAIN = ["NORAIN", "SMALLRAIN", "BIGRAIN"]
 
 def register_clothes(user: str, clothe: Clothe) -> bool:
     if clothe.c_type in __TYPES and clothe.c_heat in __HEAT and clothe.c_rain in __RAIN:
-        return DB().commit("""INSERT INTO Clothes
+        data = DB().commit("""INSERT INTO Clothes
                             (user_mail, name, color, type, heat, rain)
                             VALUES (%s,%s,%s,%s,%s,%s)""",
                            (user, clothe.name, clothe.color, clothe.c_type, clothe.c_heat, clothe.c_rain))
-    return False
+        if data:
+            return data
+        raise HTTPException(500, "Can't save clothe")
+    raise HTTPException(400, "Invalid variables")
 
 
 def get_clothes(user: str) -> List[Clothe]:

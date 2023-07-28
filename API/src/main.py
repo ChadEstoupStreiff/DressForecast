@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Union, Dict, Any
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from auth.auth_bearer import JWTBearer
@@ -26,29 +26,27 @@ app.add_middleware(
 @app.post("/user/signup", tags=["user"])
 async def create_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
                       user_city: str):
-    if get_weather_week(user_mail) is not None:
+    if get_weather_week(city=user_city, country=user_country) is not None:
         return register_user(user_mail, user_password, user_name, user_sex, user_country, user_city)
-    return None
+    raise HTTPException(500, detail="Can't create user")
 
 
 @app.post("/user/login", tags=["user"])
-async def user_login(user_mail: str, user_password: str):
+async def user_login(user_mail: str, user_password: str) -> Union[str, None]:
     if check_user(user_mail, user_password):
         return get_token(user_mail)
-    return {
-        "error": "Wrong login details!"
-    }
+    return None
 
 
 @app.get("/user/login_info", tags=["user"])
-async def user_login_info(token: str = Depends(JWTBearer())):
+async def user_login_info(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_user_login_info(token)
 
 
 # user
 
 @app.get("/user/info", tags=["user"])
-async def user_login_info(token: str = Depends(JWTBearer())):
+async def user_login_info(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_user_info(get_user_id(token))
 
 
@@ -84,5 +82,5 @@ async def clothes_for_week(token: str = Depends(JWTBearer())):
 # Weather
 
 @app.get("/weather/week", tags=["weather"])
-async def get_week_weather(token: str = Depends(JWTBearer())):
+async def get_week_weather(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_weather_week(get_user_id(token))

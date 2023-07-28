@@ -23,11 +23,8 @@ class JWTBearer(HTTPBearer):
     def verify_jwt(jwtoken: str) -> bool:
         is_token_valid: bool = False
 
-        try:
-            payload = decode_jwt(jwtoken)
-        except:
-            payload = None
+        payload = decode_jwt(jwtoken)
 
-        if payload:
+        if payload is not None:
             is_token_valid = True
         return is_token_valid

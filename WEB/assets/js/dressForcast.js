@@ -1,32 +1,27 @@
 window.onload = function () {
-    var token = localStorage.getItem('token');
-    console.log(token);
-
-    // URL de l'API que vous souhaitez appeler
+    // API CONNEXION
     const apiUrl = 'http://localhost:8083/clothes/week';
-
-    // Headers que vous voulez envoyer avec la requête
     const headers = {
-        'Content-Type': 'application/json', // Exemple d'en-tête avec le type de contenu JSON
-        'Authorization': `Bearer ${token}`, // Exemple d'en-tête avec un jeton d'authentification
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
     };
 
-    // Configuration de la requête
+    // Requête
     const requestOptions = {
-        method: 'GET', // Méthode HTTP (GET, POST, PUT, DELETE, etc.)
-        headers: headers, // En-têtes à inclure dans la requête
+        method: 'GET',
+        headers: headers,
     };
 
     // Appel de l'API en utilisant fetch
     fetch(apiUrl, requestOptions)
         .then(response => {
-            // Vérification de la réponse de l'API
             if (!response.ok) {
-                throw new Error('Erreur lors de la requête API');
+                throw new Error('ERROR when request to api');
             }
             return response.json(); // Renvoie les données de la réponse sous forme de JSON
         })
         .then(data => {
+            //Show today's date forcast first loaded
             const weekData = data.week
             todaysDate = Object.keys(weekData)[0];
             displaySelectedDate(todaysDate);
@@ -37,7 +32,7 @@ window.onload = function () {
             const weekList = document.getElementById("weekList");
             for (const date in weekData) {
                 const listItem = document.createElement("button"); // Utilisez des boutons au lieu de list items
-                listItem.textContent = new Date(date).toLocaleDateString('fr-FR', { weekday: 'long', month: 'numeric', day: 'numeric' }); // Affichez le jour de la semaine au lieu de la date complète
+                listItem.textContent = new Date(date).toLocaleDateString('en-EN', { weekday: 'long', month: 'numeric', day: 'numeric' }); // Affichez le jour de la semaine au lieu de la date complète
                 listItem.setAttribute("data-date", date);
                 weekList.appendChild(listItem);
             }
@@ -56,21 +51,19 @@ window.onload = function () {
             // Gestion des erreurs
             console.error('Erreur:', error);
         });
-
-
 }
 
 // Fonction pour afficher la date du jour sélectionné
 function displaySelectedDate(selectedDate) {
     const datetimeDiv = document.getElementById('resultDate');
     const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
-    const formattedDate = new Date(selectedDate).toLocaleDateString(undefined, options);
+    const formattedDate = new Date(selectedDate).toLocaleDateString('en-EN', options);
     datetimeDiv.textContent = formattedDate;
 }
 
 // Fonction pour mettre à jour les données du container principal
 function updateContainerData(dayData) {
-    document.getElementById("temperature").textContent = `${dayData.feelslike}°C`;
+    document.getElementById("temperature").textContent = `${dayData.feelslike} °C`;
     document.getElementById("weatherConditions").textContent = dayData.conditions;
     document.getElementById("rainProb").textContent = `Rain prob. ${dayData.precipprob}%`;
 }
@@ -81,6 +74,8 @@ function updateClothesList(dayData) {
     clothesList.innerHTML = ""; // Clear the clothes list before appending new items
 
     for (const clothing of dayData.clothes) {
+        if (clothing == 0)
+            continue;
         const listItem = document.createElement("li");
         listItem.textContent = `${clothing.c_type} - ${clothing.name} (${clothing.color})`;
         clothesList.appendChild(listItem);

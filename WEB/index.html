@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dress Forecast</title>
-<link rel="stylesheet" href="assets/css/navigation.css">
-<link rel="stylesheet" href="assets/css/dressForcast.css">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Dress Forecast</title>
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/dressForcast.css">
 </head>
 
 <body>
     <header>
         <nav>
             <div class="left-buttons">
-                <button class="app-button">Dress Forecast</button>
+                <a class="app-button" href="./index.html">Dress Forecast</a>
             </div>
             <div class="right-buttons">
-                <a href="#" class="app-link">My Dressing</a>
-                <button class="profile-button">Profil</button>
+                <a href="./dressing.html" class="app-link">My Dressing</a>
+                <button id="profile-btn" class="profile-button">Profil</button>
             </div>
         </nav>
     </header>
@@ -36,18 +39,19 @@
             </div>
         </div>
         <div class="clothes-list">
-            <h2>Vêtements recommandés</h2>
+            <h2>Clothes recommanded</h2>
             <ul>
             </ul>
         </div>
     </div>
     <div class="calendar">
-        <h2>Calendrier des jours :</h2>
+        <h2>Weather forecast calendar</h2>
         <div class="buttons-container" id="weekList"></div>
     </div>
 
     <script src="assets/js/auth.js"></script>
     <script src="assets/js/dressForcast.js"></script>
+    <script src="assets/js/profile.js"></script>
     <script>
         // Appelle la fonction de vérification lors du chargement de la page
         checkTokenAndRedirect();

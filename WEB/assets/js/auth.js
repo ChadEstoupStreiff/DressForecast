@@ -17,7 +17,7 @@ function loginUser(userData) {
         .join('&');
 
     // Make an API request to send the user's information
-    const apiUrl = `http://localhost:8083/user/login?${queryString}`;
+    const apiUrl = `http://localhost:8083/auth?${queryString}`;
 
     return fetch(apiUrl, {
         method: 'POST',
@@ -43,7 +43,7 @@ function signupUser(userData) {
         .join('&');
 
     // Make an API request to send the user's information
-    const apiUrl = `http://localhost:8083/user/signup?${queryString}`;
+    const apiUrl = `http://localhost:8083/auth?${queryString}`;
 
     return fetch(apiUrl, {
         method: 'POST',

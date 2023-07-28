@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 from auth.auth_bearer import JWTBearer
-from auth.users import register_user, check_user, get_token, get_user_id, get_user_login_info
+from auth.users import register_user, check_user, get_token, get_user_id, get_user_login_info, encrypt
 from db.clothes import register_clothes, get_clothes, delete_clothe, update_clothe, Clothe
 from db.users import get_user_info, delete_user, update_user
 from visual_crossing_api import get_weather_week, get_clothes_for_week
@@ -21,12 +21,12 @@ app.add_middleware(
 
 
 # AUTH
-@app.get("/auth", tags=["user"])
+@app.get("/auth", tags=["auth"])
 async def endpoint_user_login_info(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_user_login_info(token)
 
 
-@app.post("/auth", tags=["user"])
+@app.post("/auth", tags=["auth"])
 async def endpoint_user_login(user_mail: str, user_password: str) -> Union[str, None]:
     if check_user(user_mail, user_password):
         return get_token(user_mail)
@@ -50,8 +50,11 @@ async def endpoint_create_user(user_mail: str, user_password: str, user_name: st
 
 
 @app.put("/user", tags=["user"])
-async def endpoint_update_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
-                               user_city: str, token: str = Depends(JWTBearer())):
+async def endpoint_update_user(user_mail: str = None, user_password: str = None, user_name: str = None,
+                               user_sex: str = None, user_country: str = None,
+                               user_city: str = None, token: str = Depends(JWTBearer())):
+    if user_password is not None:
+        user_password = encrypt(user_password)
     old_user_mail = get_user_id(token)
     if old_user_mail == user_mail:
         return update_user(old_user_mail, user_mail, user_password, user_name, user_sex, user_country, user_city)

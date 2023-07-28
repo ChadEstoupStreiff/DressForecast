@@ -1,4 +1,4 @@
-from typing import Union, Dict
+from typing import Dict
 
 import bcrypt
 from dotenv import dotenv_values
@@ -7,6 +7,11 @@ from fastapi import HTTPException
 from auth.auth_handler import decode_jwt
 from auth.auth_handler import sign_jwt
 from db.users import get_user_password, create_user
+
+
+def encrypt(text: str) -> bytes:
+    config = dotenv_values("/.env")
+    return bcrypt.hashpw(text.encode(), bcrypt.gensalt(rounds=int(config["SALT_LENGTH"])))
 
 
 def get_token(mail: str) -> str:
@@ -23,9 +28,8 @@ def is_mail(mail: str) -> bool:
 
 def register_user(user_mail: str, user_password: str, user_name: str, user_sex: str, user_country: str,
                   user_city: str) -> str:
+    user_password = encrypt(user_password)
     if is_mail(user_mail):
-        config = dotenv_values("/.env")
-        user_password = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt(rounds=int(config["SALT_LENGTH"])))
         if create_user(user_mail, user_password, user_name, user_sex, user_country, user_city):
             return get_token(user_mail)
     else:

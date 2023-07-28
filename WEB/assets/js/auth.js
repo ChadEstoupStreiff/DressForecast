@@ -10,6 +10,32 @@ function checkTokenAndRedirect() {
     }
 }
 
+function loginUser(userData) {
+    // Convert the user data object into a query string
+    const queryString = Object.entries(userData)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
+
+    // Make an API request to send the user's information
+    const apiUrl = `http://localhost:8083/user/login?${queryString}`;
+
+    return fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'application/json'
+        },
+        body: JSON.stringify(userData)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error during login: ' + response.status);
+            }
+        });
+}
+
 function signupUser(userData) {
     // Convert the user data object into a query string
     const queryString = Object.entries(userData)

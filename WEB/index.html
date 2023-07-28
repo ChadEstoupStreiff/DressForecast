@@ -1,50 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dress Forecast</title>
-        <link rel="stylesheet" href="assets/css/dressForcast.css">
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Exemple d'appel à une API</title>
+</head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li>Accueil</li>
-                <li>Dressing</li>
-                <li>Profile</li>
-            </ul>
-        </nav>
-    </header>
-    <div class="container">
-        <div class="date-row">
-            <div>
-                <h1 id="resultDate"></h1>
-            </div>
-        </div>
-        <div class="data-row">
-            <div>
-                <h2 id="temperature"></h2>
-            </div>
-            <div>
-                <h2 id="weatherConditions"></h2>
-            </div>
-            <div>
-                <h2 id="rainProb"></h2>
-            </div>
-        </div>
-        <div class="clothes-list">
-            <h2>Vêtements recommandés</h2>
-            <ul>
-                <li>T-shirt</li>
-                <li>Short</li>
-                <li>Lunettes de soleil</li>
-                <li>Crème solaire</li>
-                <li>Bouteille d'eau</li>
-            </ul>
-        </div>
-    </div>
-    <h2 id="resultAPI"></h2>
-    <script src="assets/js/dressForcast.js"></script>
+    <h1>Résultat de la requête API:</h1>
+    <div id="resultAPI"></div>
+    <h1>Date et heure:</h1>
+    <div id="resultDT"></div>
+
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/auth.js"></script>
+
+    <script>
+        // Appelle la fonction de vérification lors du chargement de la page
+        checkTokenAndRedirect();
+        // Appel de la fonction pour récupérer les données et les afficher sur la page
+        getDataFromAPI();
+        // Appel de la fonction pour afficher la date et l'heure actuelles au chargement de la page
+        displayDateTime();
+    </script>
+
 </body>
+
 </html>

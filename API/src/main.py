@@ -45,7 +45,7 @@ async def user_login_info(token: str = Depends(JWTBearer())) -> Union[Dict[str, 
 
 # user
 
-@app.get("/user/info", tags=["user"])
+@app.get("/user", tags=["user"])
 async def user_login_info(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_user_info(get_user_id(token))
 
@@ -58,7 +58,7 @@ async def list_clothes(token: str = Depends(JWTBearer())) -> List[Clothe]:
     return get_clothes(get_user_id(token))
 
 
-@app.post("/clothes/register", tags=["clothes"])
+@app.post("/clothes", tags=["clothes"])
 async def add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: str,
                      token: str = Depends(JWTBearer())) -> bool:
     try:
@@ -74,13 +74,13 @@ async def add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: st
         return False
 
 
-@app.get("/clothes/week", tags=["weather", "clothes"])
+@app.get("/clothes/week", tags=["clothes"])
 async def clothes_for_week(token: str = Depends(JWTBearer())):
     return get_clothes_for_week(get_user_id(token))
 
 
 # Weather
 
-@app.get("/weather/week", tags=["weather"])
+@app.get("/weather", tags=["weather"])
 async def get_week_weather(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_weather_week(get_user_id(token))

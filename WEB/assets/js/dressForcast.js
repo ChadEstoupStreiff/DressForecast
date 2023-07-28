@@ -1,12 +1,9 @@
 window.onload = function () {
-    var token = localStorage.getItem('token');
-    console.log(token);
-
     // API CONNEXION
     const apiUrl = 'http://localhost:8083/clothes/week';
     const headers = {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
     };
 
     // Requête
@@ -24,7 +21,7 @@ window.onload = function () {
             return response.json(); // Renvoie les données de la réponse sous forme de JSON
         })
         .then(data => {
-            console.log(data);
+            //Show today's date forcast first loaded
             const weekData = data.week
             todaysDate = Object.keys(weekData)[0];
             displaySelectedDate(todaysDate);

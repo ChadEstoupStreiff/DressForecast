@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dress Forecast</title>
-        <link rel="stylesheet" href="assets/css/dressForcast.css">
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dress Forecast</title>
+    <link rel="stylesheet" href="assets/css/dressForcast.css">
+</head>
+
 <body>
     <header>
         <nav>
-            <ul>
-                <li>Accueil</li>
-                <li>Dressing</li>
-                <li>Profile</li>
-            </ul>
+            <div class="left-buttons">
+                <button class="app-button">Dress Forecast</button>
+            </div>
+            <div class="right-buttons">
+                <a href="#" class="app-link">My Dressing</a>
+                <button class="profile-button">Profil</button>
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -36,15 +37,20 @@
         <div class="clothes-list">
             <h2>Vêtements recommandés</h2>
             <ul>
-                <li>T-shirt</li>
-                <li>Short</li>
-                <li>Lunettes de soleil</li>
-                <li>Crème solaire</li>
-                <li>Bouteille d'eau</li>
             </ul>
         </div>
     </div>
-    <h2 id="resultAPI"></h2>
+    <div class="calendar">
+        <h2>Calendrier des jours :</h2>
+        <div class="buttons-container" id="weekList"></div>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
     <script src="assets/js/dressForcast.js"></script>
+    <script>
+    // Appelle la fonction de vérification lors du chargement de la page
+        //checkTokenAndRedirect();
+        </script>
 </body>
+
 </html>

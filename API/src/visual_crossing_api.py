@@ -1,15 +1,20 @@
-import urllib.request
-import sys
 import json
+import urllib.request
+
+import sys
+
 from db.clothes import get_clothes
 from db.users import get_user_info
 
 
-def get_weather_week(user: str):
+def get_weather_week(user: str = None, city: str = None, country: str = None):
     try:
-        user_info = get_user_info(user)
+        if user is not None:
+            user_info = get_user_info(user)
+            city = user_info['city']
+            country = user_info['country']
         result_bytes = urllib.request.urlopen(
-            f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{user_info['city']}%20{user_info['country']}?unitGroup=metric&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json")
+            f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}%20{country}?unitGroup=metric&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json")
 
         # Parse the results as JSON
         json_data = json.load(result_bytes)

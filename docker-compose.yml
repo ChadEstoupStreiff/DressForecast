@@ -27,6 +27,8 @@ services:
         volumes:
             - .env:/.env
     dressforecast_database:
+        env_file:
+            - .env
         image: 'mariadb:latest'
         container_name: dressforecast_database
         restart: always

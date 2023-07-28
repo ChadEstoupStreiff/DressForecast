@@ -37,26 +37,32 @@ fetch(apiUrl, requestOptions)
             categoryCell.colSpan = 5;
             categoryCell.textContent = category;
             categoryRow.appendChild(categoryCell);
+            categoryRow.classList.add("categoryRow");
             tableBody.appendChild(categoryRow);
 
             categorizedClothing[category].forEach((clothing, index) => {
                 const row = tableBody.insertRow();
                 const nameCell = row.insertCell(0);
                 const colorCell = row.insertCell(1);
-                const typeCell = row.insertCell(2);
-                const actionsCell = row.insertCell(3);
+                const actionsCell = row.insertCell(2);
 
                 nameCell.textContent = clothing.name;
                 colorCell.textContent = clothing.color;
-                typeCell.textContent = clothing.c_type;
 
+                // Inside the fetch block after creating the "Edit" and "Delete" buttons
                 const editButton = document.createElement("button");
-                editButton.textContent = "Edit";
+                editButton.classList.add("edit-button");
+                const editIcon = document.createElement("i");
+                editIcon.classList.add("fas", "fa-edit", "button-icon");
+                editButton.appendChild(editIcon);
                 editButton.addEventListener("click", () => editClothing(index));
                 actionsCell.appendChild(editButton);
 
                 const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
+                deleteButton.classList.add("delete-button");
+                const deleteIcon = document.createElement("i");
+                deleteIcon.classList.add("fas", "fa-trash-alt", "button-icon");
+                deleteButton.appendChild(deleteIcon);
                 deleteButton.addEventListener("click", () => deleteClothing(index));
                 actionsCell.appendChild(deleteButton);
             });

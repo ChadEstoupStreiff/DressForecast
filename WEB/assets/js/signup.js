@@ -5,12 +5,12 @@ signupForm.addEventListener('submit', function (event) {
     // Get form data
     const formData = new FormData(signupForm);
     const userData = {
-        username: formData.get('username'),
-        email: formData.get('email'),
-        password: formData.get('password'),
-        gender: formData.get('gender'),
-        country: formData.get('coutry'),
-        city: formData.get('city')
+        user_mail: formData.get('email'),
+        user_password: formData.get('password'),
+        user_name: formData.get('username'),
+        user_sex: formData.get('gender'),
+        user_country: formData.get('country'),
+        user_city: formData.get('city')
     };
 
     // Call the signupUser function from auth.js

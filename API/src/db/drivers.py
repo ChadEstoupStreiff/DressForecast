@@ -1,8 +1,8 @@
 import logging
-import time
 from typing import Union, List, Any, Tuple
 
 import mysql.connector
+import time
 from dotenv import dotenv_values
 
 
@@ -50,7 +50,7 @@ class DB:
             return False
         return True
 
-    def execute(self, query: str, values: Tuple = None, keys: Tuple = None) -> List[List[Any]]:
+    def execute(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[List[Any]], None]:
         if values is None:
             values = ()
         cursor = self._get_cursor()
@@ -67,10 +67,12 @@ class DB:
             data = data_dict
         if cursor is not None:
             cursor.close()
-        return data
+        if len(data) > 0:
+            return data
+        return None
 
     def execute_single(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[Any], None]:
         data = self.execute(query, values, keys)
-        if len(data) > 0:
+        if data is not None:
             return data[0]
         return None

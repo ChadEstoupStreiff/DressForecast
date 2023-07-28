@@ -3,11 +3,14 @@ function checkTokenAndRedirect() {
     // Vérifie si le token est présent dans le localStorage
     var token = localStorage.getItem('token');
 
-    if (token) {
-        window.location.href = 'index.html';
-    } else {
+    if (!token) {
         window.location.href = 'login.html';
     }
+    // if (token && token != "null") {
+    //     window.location.href = 'index.html';
+    // } else {
+    //     window.location.href = 'login.html';
+    // }
 }
 
 function loginUser(userData) {
@@ -17,7 +20,7 @@ function loginUser(userData) {
         .join('&');
 
     // Make an API request to send the user's information
-    const apiUrl = `http://localhost:8083/user/login?${queryString}`;
+    const apiUrl = `http://localhost:8083/auth?${queryString}`;
 
     return fetch(apiUrl, {
         method: 'POST',
@@ -43,7 +46,7 @@ function signupUser(userData) {
         .join('&');
 
     // Make an API request to send the user's information
-    const apiUrl = `http://localhost:8083/user/signup?${queryString}`;
+    const apiUrl = `http://localhost:8083/user?${queryString}`;
 
     return fetch(apiUrl, {
         method: 'POST',
@@ -58,4 +61,9 @@ function signupUser(userData) {
                 throw new Error('Error during signup: ' + response.status);
             }
         });
+}
+
+function disconnectUser() {
+    localStorage.removeItem('token'); // Remove the token from localStorage
+    checkTokenAndRedirect(); // Redirect to the login page after disconnection
 }

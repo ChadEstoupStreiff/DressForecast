@@ -21,12 +21,12 @@ app.add_middleware(
 
 
 # AUTH
-@app.get("/auth", tags=["user"])
+@app.get("/auth", tags=["auth"])
 async def endpoint_user_login_info(token: str = Depends(JWTBearer())) -> Union[Dict[str, Any], None]:
     return get_user_login_info(token)
 
 
-@app.post("/auth", tags=["user"])
+@app.post("/auth", tags=["auth"])
 async def endpoint_user_login(user_mail: str, user_password: str) -> Union[str, None]:
     if check_user(user_mail, user_password):
         return get_token(user_mail)

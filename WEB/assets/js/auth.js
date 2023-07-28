@@ -33,11 +33,3 @@ function signupUser(userData) {
             }
         });
 }
-
-
-
-
-// curl - X 'POST' \
-// 'http://localhost:8083/user/signup?user_mail=oui%40gmail.com&user_password=oui&user_name=oui&user_sex=oui&user_country=oui&user_city=oui' \
-// -H 'accept: application/json' \
-// -d ''

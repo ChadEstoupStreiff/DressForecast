@@ -126,7 +126,7 @@ window.onload = function () {
 
 // Fonction pour effectuer la requête à l'API
 function getDataFromAPI() {
-    fetch('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Paris?unitGroup=metric&include=days&key=QFTXUNVHMMAJBHEWDHG7XERWX&contentType=json')
+    fetch('http://localhost:8083/clothes/week')
         .then(response => response.json()) // Convertit la réponse en JSON
         .then(data => {
 

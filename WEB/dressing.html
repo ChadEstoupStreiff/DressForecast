@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dressing</title>
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/dressForcast.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="left-buttons">
+                <button class="app-button">Dress Forecast</button>
+            </div>
+            <div class="right-buttons">
+                <a href="#" class="app-link">My Dressing</a>
+                <button class="profile-button">Profil</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>My Dressing</h2>
+        <button class="add-button" onclick="">Add New Clothing</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="clothesTableBody">
+                <!-- Table rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="assets/js/dressing.js"></script>
+</body>
+</html>

@@ -17,7 +17,8 @@ signupForm.addEventListener('submit', function (event) {
     signupUser(userData)
         .then(responseData => {
             // Redirect to the login page after successful signup
-            window.location.href = 'login.html'; // Replace 'login.html' with the actual login page URL
+            if (responseData != null)
+                window.location.href = 'login.html'; // Replace 'login.html' with the actual login page URL
         })
         .catch(error => {
             // Handle any errors that occurred during signup

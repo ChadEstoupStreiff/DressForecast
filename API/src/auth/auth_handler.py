@@ -9,7 +9,7 @@ from fastapi import HTTPException
 def sign_jwt(user_id: str) -> str:
     payload = {
         "user_id": user_id,
-        "expires": time.time() + 600
+        "expires": time.time() + 3600
     }
 
     config = dotenv_values("/.env")

@@ -4,18 +4,9 @@ let headers = {
     'Authorization': `Bearer ${localStorage.getItem('token')}`,
 };
 
-<<<<<<< HEAD
-
-// Requête
-const requestOptions = {
-    method: 'GET',
-    headers: headers,
-};
-=======
 window.onload = function () {
     getClothing();
 }
->>>>>>> 093b5049a707d1c40b4faea40796c3f238f9a27a
 
 function getClothing() {
     //API Request config
@@ -37,50 +28,12 @@ function getClothing() {
             const categorizedClothing = {};
             const tableBody = document.getElementById("clothesTableBody");
 
-<<<<<<< HEAD
-        for (const category in categorizedClothing) {
-            const categoryRow = document.createElement("tr");
-            const categoryCell = document.createElement("td");
-            categoryCell.colSpan = 5;
-            categoryCell.textContent = category;
-            categoryRow.appendChild(categoryCell);
-            categoryRow.classList.add("categoryRow");
-            tableBody.appendChild(categoryRow);
-
-            categorizedClothing[category].forEach((clothing, index) => {
-                const row = tableBody.insertRow();
-                const nameCell = row.insertCell(0);
-                const colorCell = row.insertCell(1);
-                const actionsCell = row.insertCell(2);
-
-                nameCell.textContent = clothing.name;
-                colorCell.textContent = clothing.color;
-
-                // Inside the fetch block after creating the "Edit" and "Delete" buttons
-                const editButton = document.createElement("button");
-                editButton.classList.add("edit-button");
-                const editIcon = document.createElement("i");
-                editIcon.classList.add("fas", "fa-edit", "button-icon");
-                editButton.appendChild(editIcon);
-                editButton.addEventListener("click", () => editClothing(clothing));
-                actionsCell.appendChild(editButton);
-
-                const deleteButton = document.createElement("button");
-                deleteButton.classList.add("delete-button");
-                const deleteIcon = document.createElement("i");
-                deleteIcon.classList.add("fas", "fa-trash-alt", "button-icon");
-                deleteButton.appendChild(deleteIcon);
-                deleteButton.addEventListener("click", () => deleteClothing(clothing));
-                actionsCell.appendChild(deleteButton);
-
-=======
             data.forEach((clothing) => {
                 const category = clothing.c_type;
                 if (!categorizedClothing[category]) {
                     categorizedClothing[category] = [];
                 }
                 categorizedClothing[category].push(clothing);
->>>>>>> 093b5049a707d1c40b4faea40796c3f238f9a27a
             });
 
             for (const category in categorizedClothing) {
@@ -107,7 +60,7 @@ function getClothing() {
                     const editIcon = document.createElement("i");
                     editIcon.classList.add("fas", "fa-edit", "button-icon");
                     editButton.appendChild(editIcon);
-                    editButton.addEventListener("click", () => editClothing(index));
+                    editButton.addEventListener("click", () => editClothing(clothing));
                     actionsCell.appendChild(editButton);
 
                     const deleteButton = document.createElement("button");

@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Dressing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/navigation.css">
-    <link rel="stylesheet" href="assets/css/dressForcast.css">
+    <link rel="stylesheet" href="assets/css/dressing.css">
 </head>
 <body>
     <header>
@@ -15,22 +16,22 @@
             </div>
             <div class="right-buttons">
                 <a href="./dressing.html" class="app-link">My Dressing</a>
-                <button class="profile-button">Profil</button>
+                <button id="profile-btn" class="profile-button">Profil</button>
             </div>
         </nav>
     </header>
 
     <div class="container">
         <h2>My Dressing</h2>
-        <button class="add-button" onclick="">Add New Clothing</button>
+        <button class="add-button" onclick="">
+            <i class="fas fa-plus button-icon"></i>New clothing
+        </button>
         <table>
             <thead>
                 <tr>
-                    <th>Category</th>
                     <th>Name</th>
                     <th>Color</th>
-                    <th>Type</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="clothesTableBody">
@@ -39,6 +40,12 @@
         </table>
     </div>
 
+    <script src="assets/js/auth.js"></script>
     <script src="assets/js/dressing.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script>
+        // Appelle la fonction de vérification lors du chargement de la page
+        checkTokenAndRedirect();
+    </script>
 </body>
 </html>

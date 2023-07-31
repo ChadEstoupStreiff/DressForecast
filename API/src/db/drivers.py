@@ -42,13 +42,13 @@ class DB:
                 values = ()
             cursor = self._get_cursor()
             cursor.execute(query, values)
-
+            affected = cursor.rowcount
             if cursor is not None:
                 cursor.close()
             self.conn.commit()
+            return affected > 0
         except:
             return False
-        return True
 
     def execute(self, query: str, values: Tuple = None, keys: Tuple = None) -> Union[List[List[Any]], None]:
         if values is None:

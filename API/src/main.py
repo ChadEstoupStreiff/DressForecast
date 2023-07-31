@@ -91,8 +91,8 @@ async def endpoint_add_clothe(name: str, color: str, c_type: str, c_heat: str, c
 
 
 @app.put("/clothes", tags=["clothes"])
-async def endpoint_update_clothe(old_name: str, old_color: str, old_c_type: str, old_c_heat: str, old_rain: str,
-                                 new_name: str, new_color: str, new_c_type: str, new_c_heat: str, new_rain: str,
+async def endpoint_update_clothe(old_name: str, old_color: str, old_c_type: str, old_c_heat: str, old_c_rain: str,
+                                 new_name: str, new_color: str, new_c_type: str, new_c_heat: str, new_c_rain: str,
                                  token: str = Depends(JWTBearer())) -> bool:
     try:
         old_clothe = Clothe(
@@ -100,14 +100,14 @@ async def endpoint_update_clothe(old_name: str, old_color: str, old_c_type: str,
             old_color,
             old_c_type,
             old_c_heat,
-            old_rain,
+            old_c_rain,
         )
         new_clothe = Clothe(
             new_name,
             new_color,
             new_c_type,
             new_c_heat,
-            new_rain,
+            new_c_rain,
         )
         return update_clothe(get_user_id(token), old_clothe, new_clothe)
     except:

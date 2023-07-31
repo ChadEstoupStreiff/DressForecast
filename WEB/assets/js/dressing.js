@@ -5,6 +5,7 @@ const headers = {
     'Authorization': `Bearer ${localStorage.getItem('token')}`,
 };
 
+
 // Requête
 const requestOptions = {
     method: 'GET',
@@ -55,7 +56,7 @@ fetch(apiUrl, requestOptions)
                 const editIcon = document.createElement("i");
                 editIcon.classList.add("fas", "fa-edit", "button-icon");
                 editButton.appendChild(editIcon);
-                editButton.addEventListener("click", () => editClothing(index));
+                editButton.addEventListener("click", () => editClothing(clothing));
                 actionsCell.appendChild(editButton);
 
                 const deleteButton = document.createElement("button");
@@ -63,8 +64,9 @@ fetch(apiUrl, requestOptions)
                 const deleteIcon = document.createElement("i");
                 deleteIcon.classList.add("fas", "fa-trash-alt", "button-icon");
                 deleteButton.appendChild(deleteIcon);
-                deleteButton.addEventListener("click", () => deleteClothing(index));
+                deleteButton.addEventListener("click", () => deleteClothing(clothing));
                 actionsCell.appendChild(deleteButton);
+
             });
         }
     })
@@ -74,6 +76,13 @@ fetch(apiUrl, requestOptions)
 
 // Function to edit a clothing item (dummy function for now)
 function editClothing(index) {
+    var url = 'edit_clothe.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(index["name"]) 
+    + '&' + encodeURIComponent('color') + '=' + encodeURIComponent(index["color"])
+    + '&' + encodeURIComponent('c_type') + '=' + encodeURIComponent(index["c_type"])
+    + '&' + encodeURIComponent('c_heat') + '=' + encodeURIComponent(index["c_heat"])
+    + '&' + encodeURIComponent('c_rain') + '=' + encodeURIComponent(index["c_rain"]);
+    window.location.href = url;
+
     console.log("Editing clothing item at index:", index);
 }
 

@@ -15,7 +15,7 @@ add_clothe_form.addEventListener('submit', function (event) {
     addClothe(clotheData)
     .then(responseData => {
         // Redirect to the login page after successful signup
-        window.location.href = 'index.html'; // Replace 'login.html' with the actual login page URL
+        window.location.href = 'dressing.html';
     })
     .catch(error => {
         // Handle any errors that occurred during signup

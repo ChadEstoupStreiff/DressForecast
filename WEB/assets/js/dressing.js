@@ -80,11 +80,11 @@ function getClothing() {
 
 // Function to edit a clothing item (dummy function for now)
 function editClothing(index) {
-    var url = 'edit_clothe.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(index["name"]) 
-    + '&' + encodeURIComponent('color') + '=' + encodeURIComponent(index["color"])
-    + '&' + encodeURIComponent('c_type') + '=' + encodeURIComponent(index["c_type"])
-    + '&' + encodeURIComponent('c_heat') + '=' + encodeURIComponent(index["c_heat"])
-    + '&' + encodeURIComponent('c_rain') + '=' + encodeURIComponent(index["c_rain"]);
+    var url = 'edit_clothe.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(index["name"])
+        + '&' + encodeURIComponent('color') + '=' + encodeURIComponent(index["color"])
+        + '&' + encodeURIComponent('c_type') + '=' + encodeURIComponent(index["c_type"])
+        + '&' + encodeURIComponent('c_heat') + '=' + encodeURIComponent(index["c_heat"])
+        + '&' + encodeURIComponent('c_rain') + '=' + encodeURIComponent(index["c_rain"]);
     window.location.href = url;
 
     console.log("Editing clothing item at index:", index);
@@ -108,11 +108,8 @@ function deleteClothing(clothing) {
             return response.json(); // Renvoie les données de la réponse sous forme de JSON
         })
         .then(data => {
-            //getClothing();
             if (data) {
-                alert("Clothing deleted with success");
-            } else {
-                alert("Failure : Clothing can't be deleted");
+                window.location.reload();    
             }
         })
         .catch(error => {

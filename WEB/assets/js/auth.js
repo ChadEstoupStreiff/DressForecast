@@ -1,16 +1,11 @@
-// Fonction pour vérifier si le token est initialisé
+// Function to check if the token is initialized
 function checkTokenAndRedirect() {
-    // Vérifie si le token est présent dans le localStorage
+    // Check if the token is in localStorage
     var token = localStorage.getItem('token');
 
     if (!token) {
         window.location.href = 'login.html';
     }
-    // if (token && token != "null") {
-    //     window.location.href = 'index.html';
-    // } else {
-    //     window.location.href = 'login.html';
-    // }
 }
 
 function loginUser(userData) {

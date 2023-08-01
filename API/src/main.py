@@ -77,57 +77,48 @@ async def endpoint_list_clothes(token: str = Depends(JWTBearer())) -> List[Cloth
 @app.post("/clothes", tags=["clothes"])
 async def endpoint_add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: str,
                               token: str = Depends(JWTBearer())) -> bool:
-    try:
-        clothe = Clothe(
-            name,
-            color,
-            c_type,
-            c_heat,
-            c_rain,
-        )
-        return register_clothes(get_user_id(token), clothe)
-    except:
-        return False
+    clothe = Clothe(
+        name,
+        color,
+        c_type,
+        c_heat,
+        c_rain,
+    )
+    return register_clothes(get_user_id(token), clothe)
 
 
 @app.put("/clothes", tags=["clothes"])
 async def endpoint_update_clothe(old_name: str, old_color: str, old_c_type: str, old_c_heat: str, old_rain: str,
                                  new_name: str, new_color: str, new_c_type: str, new_c_heat: str, new_rain: str,
                                  token: str = Depends(JWTBearer())) -> bool:
-    try:
-        old_clothe = Clothe(
-            old_name,
-            old_color,
-            old_c_type,
-            old_c_heat,
-            old_rain,
-        )
-        new_clothe = Clothe(
-            new_name,
-            new_color,
-            new_c_type,
-            new_c_heat,
-            new_rain,
-        )
-        return update_clothe(get_user_id(token), old_clothe, new_clothe)
-    except:
-        return False
+    old_clothe = Clothe(
+        old_name,
+        old_color,
+        old_c_type,
+        old_c_heat,
+        old_rain,
+    )
+    new_clothe = Clothe(
+        new_name,
+        new_color,
+        new_c_type,
+        new_c_heat,
+        new_rain,
+    )
+    return update_clothe(get_user_id(token), old_clothe, new_clothe)
 
 
 @app.delete("/clothes", tags=["clothes"])
 async def endpoint_delete_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: str,
                                  token: str = Depends(JWTBearer())) -> bool:
-    try:
-        clothe = Clothe(
-            name,
-            color,
-            c_type,
-            c_heat,
-            c_rain,
-        )
-        return delete_clothe(get_user_id(token), clothe)
-    except:
-        return False
+    clothe = Clothe(
+        name,
+        color,
+        c_type,
+        c_heat,
+        c_rain,
+    )
+    return delete_clothe(get_user_id(token), clothe)
 
 
 @app.get("/clothes/week", tags=["clothes"])

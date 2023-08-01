@@ -10,11 +10,14 @@ table {
     border-collapse: collapse;
 }
 
-table, th, td {
+table,
+th,
+td {
     border: 1px solid #ccc;
 }
 
-th, td {
+th,
+td {
     padding: 8px;
     text-align: center;
 }
@@ -23,7 +26,7 @@ th {
     background-color: #f5f5f5;
 }
 
-.categoryRow{
+.categoryRow {
     background-color: #a5a3a3;
 }
 
@@ -66,13 +69,13 @@ th {
     align-items: center;
 }
 
-.edit-button{
+.edit-button {
     background-color: #007bff;
     color: #fff;
 }
 
-.delete-button{
-    
+.delete-button {
+
     background-color: #ff0000;
     color: #fff;
 }
@@ -85,4 +88,17 @@ th {
 /* Icon styles */
 .button-icon {
     margin-right: 5px;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: none;
 }

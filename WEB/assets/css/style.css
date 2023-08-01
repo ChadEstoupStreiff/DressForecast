@@ -28,3 +28,9 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.delete-button{
+    
+    background-color: #ff0000;
+    color: #fff;
+}

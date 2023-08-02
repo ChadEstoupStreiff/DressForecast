@@ -80,7 +80,7 @@ function getClothing() {
 
 // Function to edit a clothing item (dummy function for now)
 function editClothing(clothing) {
-    var url = 'edit_clothe.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(clothing["name"])
+    var url = 'edit.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(clothing["name"])
         + '&' + encodeURIComponent('color') + '=' + encodeURIComponent(clothing["color"])
         + '&' + encodeURIComponent('c_type') + '=' + encodeURIComponent(clothing["c_type"])
         + '&' + encodeURIComponent('c_heat') + '=' + encodeURIComponent(clothing["c_heat"])

@@ -62,21 +62,21 @@ def get_clothes_for_week(user):
 
 def get_clothes_by_day_depending_meteo(meteo_day, all_clothes):
     temp = 3
-    if(meteo_day["feelslike"] < 5):
+    if(meteo_day["feelslike"] < 0):
         temp = 0
-    elif(meteo_day["feelslike"] < 15):
+    elif(meteo_day["feelslike"] < 10):
         temp = 1
-    elif(meteo_day["feelslike"] < 25):
+    elif(meteo_day["feelslike"] < 20):
         temp = 2
 
     rain = 2
     rainList = ["BIGRAIN", "SMALLRAIN", "NORAIN"]
     if(meteo_day["precipprob"] < 10):
-        temp = 0
+        rain = 0
         rainList = ["NORAIN", "SMALLRAIN", "BIGRAIN"]
 
     elif(meteo_day["precipprob"] < 50):
-        temp = 1
+        rain = 1
         rainList = ["SMALLRAIN", "BIGRAIN", "NORAIN"]
 
     day_clothes_list = []

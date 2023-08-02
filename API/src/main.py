@@ -55,10 +55,7 @@ async def endpoint_update_user(user_mail: str = None, user_password: str = None,
                                user_city: str = None, token: str = Depends(JWTBearer())):
     if user_password is not None:
         user_password = encrypt(user_password)
-    old_user_mail = get_user_id(token)
-    if old_user_mail == user_mail:
-        return update_user(old_user_mail, user_mail, user_password, user_name, user_sex, user_country, user_city)
-    raise HTTPException(500, detail="Can't create user")
+    return update_user(get_user_id(token), user_mail, user_password, user_name, user_sex, user_country, user_city)
 
 
 @app.delete("/user", tags=["user"])
@@ -77,57 +74,48 @@ async def endpoint_list_clothes(token: str = Depends(JWTBearer())) -> List[Cloth
 @app.post("/clothes", tags=["clothes"])
 async def endpoint_add_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: str,
                               token: str = Depends(JWTBearer())) -> bool:
-    try:
-        clothe = Clothe(
-            name,
-            color,
-            c_type,
-            c_heat,
-            c_rain,
-        )
-        return register_clothes(get_user_id(token), clothe)
-    except:
-        return False
+    clothe = Clothe(
+        name,
+        color,
+        c_type,
+        c_heat,
+        c_rain,
+    )
+    return register_clothes(get_user_id(token), clothe)
 
 
 @app.put("/clothes", tags=["clothes"])
 async def endpoint_update_clothe(old_name: str, old_color: str, old_c_type: str, old_c_heat: str, old_c_rain: str,
                                  new_name: str, new_color: str, new_c_type: str, new_c_heat: str, new_c_rain: str,
                                  token: str = Depends(JWTBearer())) -> bool:
-    try:
-        old_clothe = Clothe(
-            old_name,
-            old_color,
-            old_c_type,
-            old_c_heat,
-            old_c_rain,
-        )
-        new_clothe = Clothe(
-            new_name,
-            new_color,
-            new_c_type,
-            new_c_heat,
-            new_c_rain,
-        )
-        return update_clothe(get_user_id(token), old_clothe, new_clothe)
-    except:
-        return False
+    old_clothe = Clothe(
+        old_name,
+        old_color,
+        old_c_type,
+        old_c_heat,
+        old_c_rain,
+    )
+    new_clothe = Clothe(
+        new_name,
+        new_color,
+        new_c_type,
+        new_c_heat,
+        new_c_rain,
+    )
+    return update_clothe(get_user_id(token), old_clothe, new_clothe)
 
 
 @app.delete("/clothes", tags=["clothes"])
 async def endpoint_delete_clothe(name: str, color: str, c_type: str, c_heat: str, c_rain: str,
                                  token: str = Depends(JWTBearer())) -> bool:
-    try:
-        clothe = Clothe(
-            name,
-            color,
-            c_type,
-            c_heat,
-            c_rain,
-        )
-        return delete_clothe(get_user_id(token), clothe)
-    except:
-        return False
+    clothe = Clothe(
+        name,
+        color,
+        c_type,
+        c_heat,
+        c_rain,
+    )
+    return delete_clothe(get_user_id(token), clothe)
 
 
 @app.get("/clothes/week", tags=["clothes"])

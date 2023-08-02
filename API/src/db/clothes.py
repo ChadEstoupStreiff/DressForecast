@@ -25,7 +25,7 @@ def delete_clothe(user: str, clothe: Clothe):
         """DELETE FROM Clothes
         WHERE user_mail=%s AND name=%s AND color=%s AND type=%s AND heat=%s AND rain=%s""",
         (user, clothe.name, clothe.color, clothe.c_type, clothe.c_heat, clothe.c_rain))
-    if data:
+    if data is True:
         return data
     raise HTTPException(500, "Can't delete clothe")
 
@@ -42,7 +42,7 @@ def update_clothe(user: str, old_clothe: Clothe, new_clothe: Clothe):
             WHERE user_mail=%s AND name=%s AND color=%s AND type=%s AND heat=%s AND rain=%s""",
             (new_clothe.name, new_clothe.color, new_clothe.c_type, new_clothe.c_heat, new_clothe.c_rain, user,
              old_clothe.name, old_clothe.color, old_clothe.c_type, old_clothe.c_heat, old_clothe.c_rain))
-        if data:
+        if data is True:
             return data
         raise HTTPException(500, "Can't update clothe")
     raise HTTPException(400, "Invalid variables")
@@ -54,7 +54,7 @@ def register_clothes(user: str, clothe: Clothe) -> bool:
                         (user_mail, name, color, type, heat, rain)
                         VALUES (%s,%s,%s,%s,%s,%s)""",
                            (user, clothe.name, clothe.color, clothe.c_type, clothe.c_heat, clothe.c_rain))
-        if data:
+        if data is True:
             return data
         raise HTTPException(500, "Can't save clothe")
     raise HTTPException(400, "Invalid variables")

@@ -1,10 +1,10 @@
-const add_clothe_form = document.getElementById('new_clothe_form');
-add_clothe_form.addEventListener('submit', function (event) {
+const add_clothing_form = document.getElementById('new_cloth_form');
+add_clothing_form.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission to handle it with JavaScript
 
     // Get form data
-    const formData = new FormData(add_clothe_form);
-    const clotheData = {
+    const formData = new FormData(add_clothing_form);
+    const clothingData = {
         name: formData.get('name'),
         color: formData.get('color'),
         c_type: formData.get('type'),
@@ -12,22 +12,21 @@ add_clothe_form.addEventListener('submit', function (event) {
         c_rain: formData.get('rain'),
     };
 
-    addClothe(clotheData)
-    .then(responseData => {
-        // Redirect to the login page after successful signup
-        window.location.href = 'dressing.html';
-    })
-    .catch(error => {
-        // Handle any errors that occurred during signup
-        console.error('Signup error: ' + error);
-    });
+    addClothe(clothingData)
+        .then(responseData => {
+            // Redirect to the login page after successful signup
+            window.location.href = 'dressing.html';
+        })
+        .catch(error => {
+            // Handle any errors that occurred during signup
+            console.error('Signup error: ' + error);
+        });
 });
 
-
-function addClothe(clotheData) {
+function addClothe(clothingDatas) {
     var token = localStorage.getItem('token');
     // Convert the user data object into a query string
-    const queryString = Object.entries(clotheData)
+    const queryString = Object.entries(clothingDatas)
         .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
         .join('&');
 
@@ -49,3 +48,7 @@ function addClothe(clotheData) {
             }
         });
 }
+
+document.getElementById("cancelButton").addEventListener("click", function() {
+    history.back(); // Retourne sur la page précédente
+});

@@ -12,13 +12,13 @@ document.getElementById('heat').value = c_heat;
 document.getElementById('rain').value = c_rain;
 
 
-const add_clothe_form = document.getElementById('new_clothe_form');
-add_clothe_form.addEventListener('submit', function (event) {
+const add_clothing_form = document.getElementById('newClothingForm');
+add_clothing_form.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission to handle it with JavaScript
 
     // Get form data
-    const formData = new FormData(add_clothe_form);
-    const clotheData = {
+    const formData = new FormData(add_clothing_form);
+    const clothingDatas = {
         old_name: get_name,
         old_color: color,
         old_c_type: c_type,
@@ -31,10 +31,10 @@ add_clothe_form.addEventListener('submit', function (event) {
         new_c_rain: formData.get('rain'),
     };
 
-    editClothe(clotheData)
+    editClothe(clothingDatas)
     .then(responseData => {
         // Redirect to the login page after successful signup
-        window.location.href = 'index.html'; // Replace 'login.html' with the actual login page URL
+        window.location.href = 'dressing.html'; // Replace 'login.html' with the actual login page URL
     })
     .catch(error => {
         // Handle any errors that occurred during signup
@@ -43,10 +43,10 @@ add_clothe_form.addEventListener('submit', function (event) {
 });
 
 
-function editClothe(clotheData) {
+function editClothe(clothingDatas) {
     var token = localStorage.getItem('token');
     // Convert the user data object into a query string
-    const queryString = Object.entries(clotheData)
+    const queryString = Object.entries(clothingDatas)
         .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
         .join('&');
 
@@ -69,3 +69,7 @@ function editClothe(clotheData) {
             }
         });
 }
+
+document.getElementById("cancelButton").addEventListener("click", function() {
+    history.back(); // Retourne sur la page précédente
+});

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Dress Forecast</title>
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/addEditDressing.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="left-buttons">
+                <a class="app-button" href="./index.html">Dress Forecast</a>
+            </div>
+            <div class="right-buttons">
+                <a href="./dressing.html" class="app-link">My Dressing</a>
+                <button id="profile-btn" class="profile-button">Profil</button>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <form id="editClothingForm">
+            <h2>Edit Clothing Details</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required>
+
+            <label for="type">Category:</label>
+            <select name="type" id="type" required>
+                <option value="">--Please choose an option--</option>
+                <option value="HAT">Hat</option>
+                <option value="TSHIRT">T-Shirt</option>
+                <option value="PULL">Pull</option>
+                <option value="JACKET">Jacket</option>
+                <option value="PANTS">Pants</option>
+                <option value="SHORT">Short</option>
+                <option value="SKIRT">Skirt</option>
+                <option value="SOCKS">Socks</option>
+                <option value="SHOES">Shoes</option>
+            </select>
+
+            <label for="heat">Heat:</label>
+            <select name="heat" id="heat" required>
+                <option value="">--Please choose an option--</option>
+                <option value="COLD">Cold</option>
+                <option value="MEDIUM">Temperate</option>
+                <option value="HOT">Hot</option>
+            </select>
+
+            <label for="rain">Rain Resistance:</label>
+            <select name="rain" id="rain" required>
+                <option value="">--Please choose an option--</option>
+                <option value="NORAIN">None</option>
+                <option value="MEDIUM">Small resistance</option>
+                <option value="HOT">Big resistance</option>
+            </select>
+
+            <button type="submit" id="saveButton">SAVE</button>
+        </form>
+        <button id="cancelButton">Cancel</button>
+    </div>
+
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/profile.js"></script>
+    <script src="assets/js/editClothing.js"></script>
+    <script>
+        // Appelle la fonction de vérification lors du chargement de la page
+        checkTokenAndRedirect();
+    </script>
+</body>
+
+</html>

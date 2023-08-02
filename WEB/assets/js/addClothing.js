@@ -1,4 +1,4 @@
-const add_clothing_form = document.getElementById('new_cloth_form');
+const add_clothing_form = document.getElementById('newClothingForm');
 add_clothing_form.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission to handle it with JavaScript
 

@@ -12,7 +12,7 @@ document.getElementById('heat').value = c_heat;
 document.getElementById('rain').value = c_rain;
 
 
-const add_clothing_form = document.getElementById('newClothingForm');
+const add_clothing_form = document.getElementById('editClothingForm');
 add_clothing_form.addEventListener('submit', function (event) {
     event.preventDefault(); // Prevent form submission to handle it with JavaScript
 

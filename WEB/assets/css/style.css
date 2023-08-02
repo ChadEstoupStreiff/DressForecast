@@ -28,17 +28,3 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
-
-.delete-button {
-
-    background-color: #ff0000;
-    color: #fff;
-}
-
-.edit-btn {
-    background-color: dodgerblue;
-}
-
-#logout-btn {
-    background-color: #f22525;
-}

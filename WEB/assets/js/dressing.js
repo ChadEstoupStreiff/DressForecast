@@ -109,7 +109,7 @@ function deleteClothing(clothing) {
         })
         .then(data => {
             if (data) {
-                window.location.reload();    
+                window.location.reload();
             }
         })
         .catch(error => {

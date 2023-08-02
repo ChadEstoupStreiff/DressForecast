@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Profil</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
 </head>
 
 <body>
     <header>
-        <!-- Votre en-tête ou barre de navigation -->
+        <nav>
+            <div class="left-buttons">
+                <a class="app-button" href="./index.html">Dress Forecast</a>
+            </div>
+            <div class="right-buttons">
+                <a href="./dressing.html" class="app-link">My Dressing</a>
+                <button id="logout-btn">Se déconnecter</button>
+            </div>
+        </nav>
     </header>
 
     <main>
@@ -23,13 +32,15 @@
         </div>
 
         <div class="profile-actions">
-            <button id="edit-profile-btn" class="edit-btn"><a href="./edit_user.html" class="app-link">Edit my profile</a></button>
-            
+            <button id="edit-profile-btn" class="edit-btn"><a href="./edit_user.html" class="app-link">Edit my
+                    profile</a></button>
+
             <button id="logout-btn">Se déconnecter</button>
         </div>
     </main>
 
     <script src="assets/js/auth.js"></script>
+    <script src="assets/js/dressForcast.js"></script>
     <script src="assets/js/profile.js"></script>
 </body>
 

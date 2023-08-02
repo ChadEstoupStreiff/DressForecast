@@ -53,14 +53,20 @@ edit_user_form.addEventListener('submit', function (event) {
 
     // Get form data
     const formData = new FormData(edit_user_form);
-    const userData = {
-        user_name: formData.get('name'),
-        user_mail: mail,
-        user_city: formData.get('city'),
-        user_country: formData.get('country'),
-        user_password: formData.get('password'),
-        user_sex: sex,
-    };
+    const userData = {};
+    if (formData.get('name') != get_name) {
+        userData["user_name"] = formData.get('name');
+    }
+    if (formData.get('city') != city) {
+        userData["user_city"] = formData.get('city');
+    }
+    if (formData.get('country') != country) {
+        userData["user_country"] = formData.get('country');
+    }
+    if (formData.get('password') != password) {
+        userData["user_password"] = formData.get('password');
+    }
+
     editUser(userData)
     .then(responseData => {
         // Redirect to the login page after successful signup

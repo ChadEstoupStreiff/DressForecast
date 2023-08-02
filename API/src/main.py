@@ -55,10 +55,7 @@ async def endpoint_update_user(user_mail: str = None, user_password: str = None,
                                user_city: str = None, token: str = Depends(JWTBearer())):
     if user_password is not None:
         user_password = encrypt(user_password)
-    old_user_mail = get_user_id(token)
-    if old_user_mail == user_mail:
-        return update_user(old_user_mail, user_mail, user_password, user_name, user_sex, user_country, user_city)
-    raise HTTPException(500, detail="Can't create user")
+    return update_user(get_user_id(token), user_mail, user_password, user_name, user_sex, user_country, user_city)
 
 
 @app.delete("/user", tags=["user"])

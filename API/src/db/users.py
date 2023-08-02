@@ -44,7 +44,7 @@ SET user_country=%s WHERE user_mail=%s""",
 
     if user_city is not None:
         if not DB().commit("""UPDATE Users
-SET user_password=%s WHERE user_mail=%s""",
+SET user_city=%s WHERE user_mail=%s""",
                            (user_city, old_user_mail)):
             raise HTTPException(400, "Can't update user")
 

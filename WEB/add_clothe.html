@@ -32,13 +32,34 @@
             <input type="text" id="color" name="color" required>
 
             <label for="type">Category:</label>
-            <input type="text" id="type" name="type" required>
+            <select name="type" id="type" required>
+                <option value="">--Please choose an option--</option>
+                <option value="HAT">Hat</option>
+                <option value="TSHIRT">T-Shirt</option>
+                <option value="PULL">Pull</option>
+                <option value="JACKET">Jacket</option>
+                <option value="PANTS">Pants</option>
+                <option value="SHORT">Short</option>
+                <option value="SKIRT">Skirt</option>
+                <option value="SOCKS">Socks</option>
+                <option value="SHOES">Shoes</option>
+            </select>
 
             <label for="heat">Heat:</label>
-            <input type="text" id="heat" name="heat" required>
+            <select name="heat" id="heat" required>
+                <option value="">--Please choose an option--</option>
+                <option value="COLD">Cold</option>
+                <option value="MEDIUM">Temperate</option>
+                <option value="HOT">Hot</option>
+            </select>
 
             <label for="rain">Rain Resistance:</label>
-            <input type="text" id="rain" name="rain" required>
+            <select name="rain" id="rain" required>
+                <option value="">--Please choose an option--</option>
+                <option value="NORAIN">None</option>
+                <option value="MEDIUM">Small resistance</option>
+                <option value="HOT">Big resistance</option>
+            </select>
 
             <button type="submit">CREATE</button>
             <button class="delete-button"><a class="app-button" href="./dressing.html">CANCEL</a></button>

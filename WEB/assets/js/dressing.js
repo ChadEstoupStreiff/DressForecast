@@ -79,15 +79,15 @@ function getClothing() {
 }
 
 // Function to edit a clothing item (dummy function for now)
-function editClothing(index) {
-    var url = 'edit_clothe.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(index["name"])
-        + '&' + encodeURIComponent('color') + '=' + encodeURIComponent(index["color"])
-        + '&' + encodeURIComponent('c_type') + '=' + encodeURIComponent(index["c_type"])
-        + '&' + encodeURIComponent('c_heat') + '=' + encodeURIComponent(index["c_heat"])
-        + '&' + encodeURIComponent('c_rain') + '=' + encodeURIComponent(index["c_rain"]);
+function editClothing(clothing) {
+    var url = 'edit_clothe.html?' + encodeURIComponent('name') + '=' + encodeURIComponent(clothing["name"])
+        + '&' + encodeURIComponent('color') + '=' + encodeURIComponent(clothing["color"])
+        + '&' + encodeURIComponent('c_type') + '=' + encodeURIComponent(clothing["c_type"])
+        + '&' + encodeURIComponent('c_heat') + '=' + encodeURIComponent(clothing["c_heat"])
+        + '&' + encodeURIComponent('c_rain') + '=' + encodeURIComponent(clothing["c_rain"]);
     window.location.href = url;
 
-    console.log("Editing clothing item at index:", index);
+    console.log("Editing clothing item at index:", clothing);
 }
 
 // Function to delete a clothing item (dummy function for now)

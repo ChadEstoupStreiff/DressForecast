@@ -34,7 +34,7 @@ add_clothe_form.addEventListener('submit', function (event) {
     editClothe(clotheData)
     .then(responseData => {
         // Redirect to the login page after successful signup
-        window.location.href = 'index.html'; // Replace 'login.html' with the actual login page URL
+        window.location.href = 'dressing.html'; // Replace 'login.html' with the actual login page URL
     })
     .catch(error => {
         // Handle any errors that occurred during signup
@@ -69,3 +69,7 @@ function editClothe(clotheData) {
             }
         });
 }
+
+document.getElementById("cancelButton").addEventListener("click", function() {
+    history.back(); // Retourne sur la page précédente
+});

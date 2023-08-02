@@ -29,8 +29,16 @@ button {
     cursor: pointer;
 }
 
-.delete-button{
-    
+.delete-button {
+
     background-color: #ff0000;
     color: #fff;
+}
+
+.edit-btn {
+    background-color: dodgerblue;
+}
+
+#logout-btn {
+    background-color: #f22525;
 }

@@ -52,3 +52,8 @@ function addClothe(clothingDatas) {
 document.getElementById("cancelButton").addEventListener("click", function() {
     history.back(); // Retourne sur la page précédente
 });
+
+document.getElementById('profile-btn').addEventListener('click', function () {
+    checkTokenAndRedirect();
+    window.location.href = 'profile.html';
+});

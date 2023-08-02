@@ -116,3 +116,8 @@ function deleteClothing(clothing) {
             console.error('Erreur:', error);
         });
 }
+
+document.getElementById('profile-btn').addEventListener('click', function () {
+    checkTokenAndRedirect();
+    window.location.href = 'profile.html';
+});

@@ -22,31 +22,31 @@ def update_user(old_user_mail: str, user_mail: str = None, user_password: bytes 
         if not DB().commit("""UPDATE Users
 SET user_password=%s WHERE user_mail=%s""",
                            (user_password, old_user_mail)):
-            raise HTTPException(400, "Can't update user")
+            raise HTTPException(400, "Can't update user password")
 
     if user_name is not None:
         if not DB().commit("""UPDATE Users
 SET user_name=%s WHERE user_mail=%s""",
                            (user_name, old_user_mail)):
-            raise HTTPException(400, "Can't update user")
+            raise HTTPException(400, "Can't update user name")
 
     if user_sex is not None:
         if not DB().commit("""UPDATE Users
 SET user_sex=%s WHERE user_mail=%s""",
                            (user_sex, old_user_mail)):
-            raise HTTPException(400, "Can't update user")
+            raise HTTPException(400, "Can't update user sex")
 
     if user_country is not None:
         if not DB().commit("""UPDATE Users
 SET user_country=%s WHERE user_mail=%s""",
                            (user_country, old_user_mail)):
-            raise HTTPException(400, "Can't update user")
+            raise HTTPException(400, "Can't update use countryr")
 
     if user_city is not None:
         if not DB().commit("""UPDATE Users
 SET user_city=%s WHERE user_mail=%s""",
                            (user_city, old_user_mail)):
-            raise HTTPException(400, "Can't update user")
+            raise HTTPException(400, "Can't update user city")
 
     if user_mail is not None:
         if not DB().commit("""UPDATE Users

@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <title>Dress Forecast</title>
     <link rel="stylesheet" href="assets/css/navigation.css">
-    <link rel="stylesheet" href="assets/css/dressForcast.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/addEditDressing.css">
 </head>
 
 <body>
@@ -30,7 +29,18 @@
             <input type="text" id="name" name="name" required>
 
             <label for="country">Country:</label>
-            <input type="text" id="country" name="country" required>
+            <select id="country" name="country">
+                <option value="united_states">United States</option>
+                <option value="china">China</option>
+                <option value="japan">Japan</option>
+                <option value="germany">Germany</option>
+                <option value="united_kingdom">United Kingdom</option>
+                <option value="india">India</option>
+                <option value="france">France</option>
+                <option value="italy">Italy</option>
+                <option value="czech_republic">Czech Republic</option>
+                <option value="canada">Canada</option>
+            </select>
 
             <label for="city">City:</label>
             <input type="text" id="city" name="city" required>
@@ -38,9 +48,9 @@
             <label for="password">Password:</label>
             <input type="text" id="password" name="password" required>
 
-            <button type="submit">SAVE</button>
-            <button class="delete-button"><a class="app-button" href="./index.html">CANCEL</a></button>
+            <button type="submit" id="saveButton">SAVE</button>
         </form>
+        <button id="cancelButton">Cancel</button>
     </div>
 
     <script src="assets/js/auth.js"></script>

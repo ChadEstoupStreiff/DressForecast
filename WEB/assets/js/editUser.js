@@ -105,3 +105,7 @@ function editUser(userData) {
             }
         });
 }
+
+document.getElementById("cancelButton").addEventListener("click", function() {
+    history.back(); // Retourne sur la page précédente
+});

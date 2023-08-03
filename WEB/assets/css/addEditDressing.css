@@ -50,6 +50,8 @@ button#cancelButton {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
+    margin-left: 43%;
 }
 
 button#saveButton:hover {

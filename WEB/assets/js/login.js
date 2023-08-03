@@ -21,6 +21,6 @@ loginForm.addEventListener('submit', function (event) {
         })
         .catch(error => {
             // Handle any errors that occurred during logging in
-            console.error('Login error: ' + error);
+            alert("Connection failure : wrong email or password !");
         });
 });

@@ -63,9 +63,18 @@ function displaySelectedDate(selectedDate) {
 
 // Fonction pour mettre à jour les données du container principal
 function updateContainerData(dayData) {
+    let weatherConditions = dayData.conditions;
     document.getElementById("temperature").textContent = `${dayData.feelslike} °C`;
-    document.getElementById("weatherConditions").textContent = dayData.conditions;
+    document.getElementById("weatherConditions").textContent = weatherConditions;
     document.getElementById("rainProb").textContent = `Rain prob. ${dayData.precipprob}%`;
+    if (weatherConditions.includes("Rain")) {
+        document.body.style.backgroundImage = `url("./assets/img/rain.jpg")`;
+    }else if(weatherConditions.includes("cloudy")){
+        document.body.style.backgroundImage = `url("./assets/img/cloudy.jpg")`;
+    }else if(weatherConditions.includes("Clear")){
+        document.body.style.backgroundImage = `url("./assets/img/sunny.jpg")`;
+    }
+    
 }
 
 // Fonction pour mettre à jour la liste des vêtements en fonction des données du jour

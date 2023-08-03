@@ -4,46 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register page</title>
-    <link rel="stylesheet" href="assets/css/addEditDressing.css">
+    <title>Page d'inscription</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <form id="signup_form">
-            <h2>Register</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+    <form id="signup_form">
+        <h2>Inscription</h2>
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" name="username" required>
 
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="password" required>
 
-            <label for="confirm-password">Confirm password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+        <label for="confirm-password">Confirmer le mot de passe:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
 
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
+        <label for="gender">Genre:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
 
-            <label for="country">Country:</label>
-            <input type="text" id="filter" onkeyup="filterList()" placeholder="Search a country...">
-            <select id="countryList">
-            </select>
+        <label for="country">Country:</label>
+        <select id="country" name="country">
+            <option value="united_states">United States</option>
+            <option value="china">China</option>
+            <option value="japan">Japan</option>
+            <option value="germany">Germany</option>
+            <option value="united_kingdom">United Kingdom</option>
+            <option value="india">India</option>
+            <option value="france">France</option>
+            <option value="italy">Italy</option>
+            <option value="czech_republic">Czech Republic</option>
+            <option value="canada">Canada</option>
+        </select>
 
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" required>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
 
-            <button type="submit" id="saveButton">Register</button>
-        </form>
-    </div>
+        <button type="submit">S'inscrire</button>
+    </form>
 
-    <script src="assets/js/signup.js"></script>
     <script src="assets/js/auth.js"></script>
+    <script src="assets/js/signup.js"></script>
 </body>
 
 </html>

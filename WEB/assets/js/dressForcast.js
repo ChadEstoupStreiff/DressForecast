@@ -1,56 +1,92 @@
 window.onload = function () {
-    // API CONNEXION
-    const apiUrl = 'http://localhost:8083/clothes/week';
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-    };
+    // Vérifier si les données sont en cache
+    const cachedData = localStorage.getItem('weather_data');
+    if (cachedData) {
+        console.log("cached");
+        //Show today's date forcast first loaded
+        const weekData = JSON.parse(cachedData);
+        todaysDate = Object.keys(weekData)[0];
+        displaySelectedDate(todaysDate);
+        updateContainerData(weekData[todaysDate]);
+        updateClothesList(weekData[todaysDate]);
 
-    // Requête
-    const requestOptions = {
-        method: 'GET',
-        headers: headers,
-    };
+        // Remplir la liste des jours du calendrier
+        const weekList = document.getElementById("weekList");
+        for (const date in weekData) {
+            const listItem = document.createElement("button"); // Utilisez des boutons au lieu de list items
+            listItem.textContent = new Date(date).toLocaleDateString('en-EN', { weekday: 'long', month: 'numeric', day: 'numeric' }); // Affichez le jour de la semaine au lieu de la date complète
+            listItem.setAttribute("data-date", date);
+            weekList.appendChild(listItem);
+        }
 
-    // Appel de l'API en utilisant fetch
-    fetch(apiUrl, requestOptions)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('ERROR when request to api');
+        // Gestionnaire d'événements pour les éléments de la liste du calendrier
+        weekList.addEventListener("click", function (event) {
+            const selectedDate = event.target.dataset.date;
+            if (selectedDate) {
+                displaySelectedDate(selectedDate);
+                updateContainerData(weekData[selectedDate]);
+                updateClothesList(weekData[selectedDate]);
             }
-            return response.json(); // Renvoie les données de la réponse sous forme de JSON
-        })
-        .then(data => {
-            //Show today's date forcast first loaded
-            const weekData = data.week
-            todaysDate = Object.keys(weekData)[0];
-            displaySelectedDate(todaysDate);
-            updateContainerData(weekData[todaysDate]);
-            updateClothesList(weekData[todaysDate]);
-
-            // Remplir la liste des jours du calendrier
-            const weekList = document.getElementById("weekList");
-            for (const date in weekData) {
-                const listItem = document.createElement("button"); // Utilisez des boutons au lieu de list items
-                listItem.textContent = new Date(date).toLocaleDateString('en-EN', { weekday: 'long', month: 'numeric', day: 'numeric' }); // Affichez le jour de la semaine au lieu de la date complète
-                listItem.setAttribute("data-date", date);
-                weekList.appendChild(listItem);
-            }
-
-            // Gestionnaire d'événements pour les éléments de la liste du calendrier
-            weekList.addEventListener("click", function (event) {
-                const selectedDate = event.target.dataset.date;
-                if (selectedDate) {
-                    displaySelectedDate(selectedDate);
-                    updateContainerData(weekData[selectedDate]);
-                    updateClothesList(weekData[selectedDate]);
-                }
-            });
-        })
-        .catch(error => {
-            // Gestion des erreurs
-            console.error('Erreur:', error);
         });
+
+    } else {
+        console.log("not cached");
+        // API CONNEXION
+        const apiUrl = 'http://localhost:8083/clothes/week';
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        };
+
+        // Requête
+        const requestOptions = {
+            method: 'GET',
+            headers: headers,
+        };
+
+        // Appel de l'API en utilisant fetch
+        fetch(apiUrl, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('ERROR when request to api');
+                }
+                return response.json(); // Renvoie les données de la réponse sous forme de JSON
+            })
+            .then(data => {
+                //Show today's date forcast first loaded
+                const weekData = data.week
+                todaysDate = Object.keys(weekData)[0];
+                displaySelectedDate(todaysDate);
+                updateContainerData(weekData[todaysDate]);
+                updateClothesList(weekData[todaysDate]);
+
+                // Remplir la liste des jours du calendrier
+                const weekList = document.getElementById("weekList");
+                for (const date in weekData) {
+                    const listItem = document.createElement("button"); // Utilisez des boutons au lieu de list items
+                    listItem.textContent = new Date(date).toLocaleDateString('en-EN', { weekday: 'long', month: 'numeric', day: 'numeric' }); // Affichez le jour de la semaine au lieu de la date complète
+                    listItem.setAttribute("data-date", date);
+                    weekList.appendChild(listItem);
+                }
+
+                // Gestionnaire d'événements pour les éléments de la liste du calendrier
+                weekList.addEventListener("click", function (event) {
+                    const selectedDate = event.target.dataset.date;
+                    if (selectedDate) {
+                        displaySelectedDate(selectedDate);
+                        updateContainerData(weekData[selectedDate]);
+                        updateClothesList(weekData[selectedDate]);
+                    }
+                });
+
+                // Stocker les nouvelles données en cache
+                localStorage.setItem('weather_data', JSON.stringify(data.week));
+            })
+            .catch(error => {
+                // Gestion des erreurs
+                console.error('Erreur:', error);
+            });
+    }
 }
 
 // Fonction pour afficher la date du jour sélectionné
@@ -69,12 +105,12 @@ function updateContainerData(dayData) {
     document.getElementById("rainProb").textContent = `Rain prob. ${dayData.precipprob}%`;
     if (weatherConditions.includes("Rain")) {
         document.body.style.backgroundImage = `url("./assets/img/rain.jpg")`;
-    }else if(weatherConditions.includes("cloudy")){
+    } else if (weatherConditions.includes("cloudy")) {
         document.body.style.backgroundImage = `url("./assets/img/cloudy.jpg")`;
-    }else if(weatherConditions.includes("Clear")){
+    } else if (weatherConditions.includes("Clear")) {
         document.body.style.backgroundImage = `url("./assets/img/sunny.jpg")`;
     }
-    
+
 }
 
 // Fonction pour mettre à jour la liste des vêtements en fonction des données du jour
